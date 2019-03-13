@@ -11,3 +11,28 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+
+import os
+import logging
+import subprocess
+
+from pkg_resources import resource_filename
+
+HWP2HTML_COMMAND = "java -jar %s %s %s"
+
+class Hwp2HtmlExecutor(object):
+    def execute(self, fileName, path):
+
+        here = os.path.dirname(__file__)
+        
+        command = HWP2HTML_COMMAND % (os.path.join(here, 'java', 'hwplib-1.0.0.jar'), fileName, path)
+
+        output = subprocess.check_call(
+            command,    
+            stderr = subprocess.STDOUT,
+            shell  = True
+        )
+
+        print(output)
+
+        return output#.decoding('utf-8')

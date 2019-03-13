@@ -11,3 +11,23 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+
+import os
+import unittest
+
+from hwp2html.hwp2html_executor import Hwp2HtmlExecutor
+
+class TestHwp2Html(unittest.TestCase):
+    
+    def test_1(self):
+    
+        here = os.path.dirname(__file__)
+        
+        samplePath = os.path.join(here, "sample")
+
+        out = Hwp2HtmlExecutor().execute(os.path.join(samplePath, "sample.hwp"), samplePath)
+
+        self.assertEqual(out, 0)
+
+if __name__ == '__main__':
+    unittest.main()
